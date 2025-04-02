@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: huaydin <huaydin@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: grohr <grohr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/25 13:25:30 by huaydin           #+#    #+#             */
-/*   Updated: 2023/08/30 19:19:52 by huaydin          ###   ########.fr       */
+/*   Created: 2025/04/02 16:43:58 by grohr             #+#    #+#             */
+/*   Updated: 2025/04/02 17:08:24 by grohr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ void	exit_if_sorted_or_has_duplicate(t_stacks *s, int i)
 			while (j < s->a_size)
 			{
 				if (s->a[i] == s->a[j])
-					free_and_exit_with_message(s, "Error\n");
+					free_excit_msg(s, "Error\n");
 				j++;
 			}
 			i++;
 		}
 	}
 	if (is_array_sorted(s))
-		free_and_exit_with_message(s, NULL);
+		free_excit_msg(s, NULL);
 }
 
 void	parse_numbers(t_stacks *s)
@@ -52,7 +52,7 @@ void	parse_numbers(t_stacks *s)
 	free(tmp);
 }
 
-void	initialize_stacks(int argc, char **argv, t_stacks *s)
+void	init_stacks(int argc, char **argv, t_stacks *s)
 {
 	int	i;
 
@@ -69,10 +69,10 @@ void	initialize_stacks(int argc, char **argv, t_stacks *s)
 	}
 	s->a = malloc(s->a_size * sizeof * s->a);
 	if (s->a == NULL)
-		free_and_exit_with_message(s, "Error\n");
+		free_excit_msg(s, "Error\n");
 	s->b = malloc(s->a_size * sizeof * s->b);
 	if (s->b == NULL)
-		free_and_exit_with_message(s, "Error\n");
+		free_excit_msg(s, "Error\n");
 }
 
 void	create_index(t_stacks *s)
@@ -84,7 +84,7 @@ void	create_index(t_stacks *s)
 
 	new_a = malloc(s->a_size * sizeof * new_a);
 	if (new_a == NULL)
-		free_and_exit_with_message(s, "Error\n");
+		free_excit_msg(s, "Error\n");
 	i = -1;
 	while (++i < s->a_size)
 	{
@@ -121,9 +121,9 @@ int	ft_atol(const char *n, t_stacks *s)
 	while (n[i])
 	{
 		if (res > 2147483647 || (res * sign) < -2147483648 || ft_strlen(n) > 11)
-			free_and_exit_with_message(s, "Error\n");
+			free_excit_msg(s, "Error\n");
 		if (!(n[i] >= '0' && n[i] <= '9'))
-			free_and_exit_with_message(s, "Error\n");
+			free_excit_msg(s, "Error\n");
 		res = res * 10 + (n[i++] - '0');
 	}
 	return ((int)(res * sign));

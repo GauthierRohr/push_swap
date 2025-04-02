@@ -5,25 +5,21 @@
 #                                                     +:+ +:+         +:+      #
 #    By: grohr <grohr@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/03/28 19:08:20 by grohr             #+#    #+#              #
-#    Updated: 2025/03/28 19:14:48 by grohr            ###   ########.fr        #
+#    Created: 2025/03/29 13:13:00 by grohr             #+#    #+#              #
+#    Updated: 2025/04/02 16:18:36 by grohr            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Nom de l'exécutable
 NAME = push_swap
-
-# Compilateur et flags
 CC = cc
 FLAGS = -Wall -Wextra -Werror -g
-RM = rm -rf
 
 # Répertoires
 LIBFT_DIR = libft
 SRC_DIR = src/
 OBJ_DIR = obj/
 
-# Fichiers sources et objets
+# Sources et objets
 SRCS = utils.c move.c sort.c main.c
 SRC = $(addprefix $(SRC_DIR),$(SRCS))
 OBJ = $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC))
@@ -31,7 +27,7 @@ OBJ = $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC))
 # Réinitialisation de COMPILED avant chaque compilation
 COMPILED = 0
 
-# Librairie
+# Librairies
 LIBFT = $(LIBFT_DIR)/libft.a
 
 # Couleurs
@@ -52,7 +48,6 @@ define PROGRESS_BAR
 		$(PERCENT)
 endef
 
-
 # Règles
 all: $(LIBFT) $(NAME)
 	@echo "\n$(CYAN)[push_swap]$(RESET):$(GREEN) Compilation terminée ! 🥳$(RESET)"
@@ -62,7 +57,7 @@ $(LIBFT):
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
 	@$(CC) $(FLAGS) $(OBJ) -o $(NAME) -L./$(LIBFT_DIR) -lft
-	@echo "$(GREEN) Compilation de push_swap réussie ! $(RESET)"
+	@echo "\n$(GREEN) Compilation de push_swap réussie ! $(RESET)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
@@ -74,33 +69,44 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 clean:
-	@$(RM) $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR)
 	@make -s -C $(LIBFT_DIR) clean
 	@echo "$(CYAN)[push_swap]$(RESET):$(GREEN) Fichiers objets => Cleaned!$(RESET)"
 	@echo "$(CYAN)[libft]$(RESET):$(GREEN) Fichiers objets => Cleaned!$(RESET)"
 
 fclean: clean
-	@$(RM) $(NAME)
+	@rm -f $(NAME)
 	@make -s -C $(LIBFT_DIR) fclean
 	@echo "$(CYAN)[push_swap]$(RESET):$(GREEN) Exécutable => Cleaned!$(RESET)"
 
 re: fclean all
 
-# Fun targets
+# Autisme 
 flex:
 	@echo "🎉 Flexing those muscles! 📸"
 	@sleep 0.5
-	@echo "\n    ${RED}✨ ᕙ(⇀‸↼‶)ᕗ ✨${RESET}\n"
+	@echo "\n    ${RED}✨ ᕙ(⇀‸↼‶)ᕗ ✨${NC}\n"
 	@sleep 0.5
-	@echo "\n    ${GREEN}   ᕙ(✧ڡ✧)ᕗ  ${RESET}\n"
+	@echo "\n    ${GREEN}   ᕙ(✧ڡ✧)ᕗ  ${NC}\n"
 	@sleep 0.5
-	@echo "\n🏆 Flex session complete! I'm a fcking boss!"
+	@echo "\n    ${YELLOW}⚡️ ᕙ(^▽^)ᕗ ⚡️${NC}\n"
+	@sleep 0.5
+	@echo "\n    ${BLUE}   ᕦ(ò_óˇ)ᕤ  ${NC}\n"
+	@sleep 0.5
+	@echo "\n    ${PURPLE}💥 ᕙ(▀̿̿Ĺ̯̿̿▀̿ ̿)ᕗ 💥${NC}\n"
+	@sleep 0.5
+	@echo "\n🏆 Flex session complete! I'm a fcking boss"!
 
 seum:
-	@echo "\n ${RED}   Pls... ${RESET}\n"
+	@echo "\n ${RED}   ༼;´༎ຶ ۝ ༎ຶ༽ ${NC}\n"
 	@sleep 0.5
-	@echo "\n ${CYAN}╭∩╮( •̀_•́ )╭∩╮${RESET}\n"
+	@echo "\n ${GREEN}   (˚ ˃̣̣̥⌓˂̣̣̥ ) ${NC}\n"
 	@sleep 0.5
-	@echo "\n🤬 SEUM MODE ACTIVATED!"
+	@echo "\n ${CYAN}╭∩╮( •̀_•́ )╭∩╮${NC}\n"
+	@sleep 0.5
+	@echo "\n ${PURPLE}   (ﾉಥ益ಥ) ${NC}\n"
+	@sleep 0.5
+	@echo "\n ${YELLOW}   ᶠᶸᶜᵏᵧₒᵤ!${NC}\n"
+	@sleep 0.5
 
 .PHONY: all clean fclean re flex seum
