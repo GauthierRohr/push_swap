@@ -6,7 +6,7 @@
 /*   By: grohr <grohr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:43:38 by grohr             #+#    #+#             */
-/*   Updated: 2025/04/02 18:13:31 by grohr            ###   ########.fr       */
+/*   Updated: 2025/04/02 18:46:01 by grohr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,10 @@ void	free_excit_msg(t_stacks *s, char *msg)
 		write(2, msg, ft_strlen(msg));
 	if (s != NULL)
 	{
-		if (s->a != NULL)
-			free(s->a);
-		if (s->b != NULL)
-			free(s->b);
-		if (s->join_args != NULL)
-			free(s->join_args);
-		if (s != NULL)
-			free(s);
+		free(s->a);
+		free(s->b);
+		free(s->join_args);
+		free(s);
 	}
 	exit(1);
 }
