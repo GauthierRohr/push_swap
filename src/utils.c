@@ -6,7 +6,7 @@
 /*   By: grohr <grohr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:43:58 by grohr             #+#    #+#             */
-/*   Updated: 2025/04/02 17:08:24 by grohr            ###   ########.fr       */
+/*   Updated: 2025/04/02 18:28:14 by grohr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,26 @@ void	parse_numbers(t_stacks *s)
 	free(tmp);
 }
 
-void	init_stacks(int argc, char **argv, t_stacks *s)
+void	init_stacks(int ac, char **av, t_stacks *s)
 {
 	int	i;
+	int	words;
 
 	i = 0;
+	words = 0;
 	s->a_size = 0;
 	s->b_size = 0;
-	while (--argc)
+	while (--ac)
 	{
-		if (ft_count_words(argv[i + 1], ' '))
-			s->a_size += ft_count_words(argv[i + 1], ' ');
-		else
-			s->a_size++;
-		i++;
+	    words = ft_count_words(av[i + 1], ' ');
+	    if (words > 0)
+	        s->a_size += words;
+	    i++;
 	}
-	s->a = malloc(s->a_size * sizeof * s->a);
+	s->a = malloc(s->a_size * sizeof(*s->a));
 	if (s->a == NULL)
 		free_excit_msg(s, "Error\n");
-	s->b = malloc(s->a_size * sizeof * s->b);
+	s->b = malloc(s->a_size * sizeof(*s->b));
 	if (s->b == NULL)
 		free_excit_msg(s, "Error\n");
 }

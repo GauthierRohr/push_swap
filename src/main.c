@@ -6,7 +6,7 @@
 /*   By: grohr <grohr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:43:38 by grohr             #+#    #+#             */
-/*   Updated: 2025/04/02 17:08:57 by grohr            ###   ########.fr       */
+/*   Updated: 2025/04/02 18:13:31 by grohr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,25 @@ static void	join_args(int argc, char **argv, t_stacks *s)
 		free(tmp);
 }
 
-int ft_count_words(const char *str, char delimiter)
+int	ft_count_words(const char *str, char delimiter)
 {
-	int	count_word;
-	int cursor_in_word;
+	int	count;
+	int	in_word;
 
-	count_word = 0;
-	cursor_in_word = 0;
+	count = 0;
+	in_word = 0;
 	while (*str)
 	{
-		if (*str == delimiter)
-			cursor_in_word = 0;
-		else if (cursor_in_word == 0)
+		if (*str != delimiter && !in_word)
 		{
-			count_word++;
-			cursor_in_word = 1;
+			count++;
+			in_word = 1;
 		}
+		else if (*str == delimiter)
+			in_word = 0;
 		str++;
 	}
-	return (count_word);
+	return (count);
 }
 
 void	free_excit_msg(t_stacks *s, char *msg)
@@ -84,25 +84,24 @@ static void	just_checking_my_args(int argc, char **argv)
 	int	i;
 	int	j;
 
-	i = 0;
 	if (argc < 2)
 		free_excit_msg(NULL, "");
-	while (++i < argc)
+	i = 1;
+	while (i < argc)
 	{
 		j = 0;
-		if (!argv[i][0] || (argv[i][0] && argv[i][0] == ' '))
+		if (!argv[i][0] || argv[i][0] == ' ')
 			free_excit_msg(NULL, "Error\n");
 		while (argv[i][j] != '\0')
 		{
 			if ((!(ft_isdigit(argv[i][j])) && (argv[i][j] != ' ')
-			&& (argv[i][j] != '-' && argv[i][j] != '+' && argv[i][j] != ' '))
-			|| (argv[i][j] == '-' && argv[i][j + 1] == '\0')
-			|| (argv[i][j] == '+' && argv[i][j + 1] == '\0')
-			|| (argv[i][j] == '-' && argv[i][j + 1] == ' ')
-			|| (argv[i][j] == '+' && argv[i][j + 1] == ' '))
+					&& (argv[i][j] != '-' && argv[i][j] != '+'))
+				|| ((argv[i][j] == '-' || argv[i][j] == '+') && (argv[i][j
+						+ 1] == '\0' || argv[i][j + 1] == ' ')))
 				free_excit_msg(NULL, "Error\n");
 			j++;
 		}
+		i++;
 	}
 }
 

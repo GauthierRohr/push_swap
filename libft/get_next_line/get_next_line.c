@@ -6,7 +6,7 @@
 /*   By: grohr <grohr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:16:58 by grohr             #+#    #+#             */
-/*   Updated: 2025/03/13 17:52:04 by grohr            ###   ########.fr       */
+/*   Updated: 2025/04/02 17:23:10 by grohr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ char	*ft_strjoin_g(char *s1, char *s2)
 	}
 	if (!s2)
 		return (NULL);
-	out = (char *)malloc(sizeof(char) * (ft_strlen_g(s1) + ft_strlen_g(s2) + 1));
+	out = (char *)malloc(sizeof(char) * (ft_strlen_g(s1)
+				+ ft_strlen_g(s2) + 1));
 	if (out == NULL)
 		return (NULL);
 	i = 0;
