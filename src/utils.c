@@ -6,7 +6,7 @@
 /*   By: grohr <grohr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:43:58 by grohr             #+#    #+#             */
-/*   Updated: 2025/04/02 18:28:14 by grohr            ###   ########.fr       */
+/*   Updated: 2025/04/02 19:43:34 by grohr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ void	exit_if_sorted_or_has_duplicate(t_stacks *s, int i)
 	if (is_array_sorted(s))
 		free_excit_msg(s, NULL);
 }
-
+// convertit les char en long pour traiter les args
 void	parse_numbers(t_stacks *s)
 {
 	char	**tmp;
 	int		i;
 	int		z;
 
-	z = 0;
 	tmp = ft_split(s->join_args, ' ');
 	i = 0;
+	z = 0;
 	while (tmp[i] != NULL && tmp[i][0] != '\0')
 	{
 		s->a[z++] = ft_atol(tmp[i++], s);
