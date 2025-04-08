@@ -6,7 +6,7 @@
 /*   By: grohr <grohr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:43:58 by grohr             #+#    #+#             */
-/*   Updated: 2025/04/02 19:43:34 by grohr            ###   ########.fr       */
+/*   Updated: 2025/04/08 17:55:30 by grohr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	exit_if_sorted_or_has_duplicate(t_stacks *s, int i)
 	if (is_array_sorted(s))
 		free_excit_msg(s, NULL);
 }
+
 // convertit les char en long pour traiter les args
 void	parse_numbers(t_stacks *s)
 {
@@ -63,10 +64,10 @@ void	init_stacks(int ac, char **av, t_stacks *s)
 	s->b_size = 0;
 	while (--ac)
 	{
-	    words = ft_count_words(av[i + 1], ' ');
-	    if (words > 0)
-	        s->a_size += words;
-	    i++;
+		words = ft_count_words(av[i + 1], ' ');
+		if (words > 0)
+			s->a_size += words;
+		i++;
 	}
 	s->a = malloc(s->a_size * sizeof(*s->a));
 	if (s->a == NULL)
@@ -78,10 +79,10 @@ void	init_stacks(int ac, char **av, t_stacks *s)
 
 void	create_index(t_stacks *s)
 {
-	int		i;
-	int		j;
-	int		k;
-	int		*new_a;
+	int	i;
+	int	j;
+	int	k;
+	int	*new_a;
 
 	new_a = malloc(s->a_size * sizeof * new_a);
 	if (new_a == NULL)

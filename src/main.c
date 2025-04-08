@@ -6,7 +6,7 @@
 /*   By: grohr <grohr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:43:38 by grohr             #+#    #+#             */
-/*   Updated: 2025/04/02 19:11:24 by grohr            ###   ########.fr       */
+/*   Updated: 2025/04/08 18:17:16 by grohr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,28 @@
 static void	join_args(int argc, char **argv, t_stacks *s)
 {
 	char	*result;
-    char	*temp;
-    int		i;
+	char	*temp;
+	int		i;
 
 	result = ft_strdup("");
 	i = 0;
-    while (++i < argc)
-    {
-        temp = ft_strjoin(result, argv[i]);
-        free(result);
-        if (!temp)
-            free_excit_msg(s, "Error\n");
-        if (i != argc - 1)
-        {
-            result = ft_strjoin(temp, " ");
-            free(temp);
-            if (!result)
-                free_excit_msg(s, "Error\n");
-        }
-        else
-            result = temp;
-    }
-    s->join_args = result;
+	while (++i < argc)
+	{
+		temp = ft_strjoin(result, argv[i]);
+		free(result);
+		if (!temp)
+			free_excit_msg(s, "Error\n");
+		if (i != argc - 1)
+		{
+			result = ft_strjoin(temp, " ");
+			free(temp);
+			if (!result)
+				free_excit_msg(s, "Error\n");
+		}
+		else
+			result = temp;
+	}
+	s->join_args = result;
 }
 
 int	ft_count_words(const char *str, char delimiter)
@@ -91,8 +91,8 @@ static void	just_checking_my_args(int argc, char **argv)
 		{
 			if ((!(ft_isdigit(argv[i][j])) && (argv[i][j] != ' ')
 					&& (argv[i][j] != '-' && argv[i][j] != '+'))
-				|| ((argv[i][j] == '-' || argv[i][j] == '+') && (argv[i][j
-						+ 1] == '\0' || argv[i][j + 1] == ' ')))
+				|| ((argv[i][j] == '-' || argv[i][j] == '+') &&
+				(argv[i][j + 1] == '\0' || argv[i][j + 1] == ' ')))
 				free_excit_msg(NULL, "Error\n");
 			j++;
 		}
