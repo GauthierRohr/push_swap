@@ -6,7 +6,7 @@
 #    By: grohr <grohr@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/29 13:13:00 by grohr             #+#    #+#              #
-#    Updated: 2025/04/02 16:18:36 by grohr            ###   ########.fr        #
+#    Updated: 2025/04/10 16:27:55 by grohr            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC_DIR = src/
 OBJ_DIR = obj/
 
 # Sources et objets
-SRCS = utils.c move.c sort.c main.c
+SRCS =  main.c move.c radix_sort.c sort.c  utils.c
 SRC = $(addprefix $(SRC_DIR),$(SRCS))
 OBJ = $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC))
 
@@ -56,7 +56,7 @@ $(LIBFT):
 	@make -s -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
-	@$(CC) $(FLAGS) $(OBJ) -o $(NAME) -L./$(LIBFT_DIR) -lft
+	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 	@echo "\n$(GREEN) Compilation de push_swap réussie ! $(RESET)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c

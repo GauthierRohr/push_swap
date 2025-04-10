@@ -6,13 +6,48 @@
 /*   By: grohr <grohr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:43:58 by grohr             #+#    #+#             */
-/*   Updated: 2025/04/08 17:55:30 by grohr            ###   ########.fr       */
+/*   Updated: 2025/04/10 16:25:25 by grohr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-void	exit_if_sorted_or_has_duplicate(t_stacks *s, int i)
+void	free_exit_msg(t_stacks *s, char *msg)
+{
+	if (msg)
+		write(2, msg, ft_strlen(msg));
+	if (s != NULL)
+	{
+		free(s->a);
+		free(s->b);
+		free(s->join_args);
+		free(s);
+	}
+	exit(1);
+}
+
+int	ft_count_words(const char *str, char delimiter)
+{
+	int	count;
+	int	in_word;
+
+	count = 0;
+	in_word = 0;
+	while (*str)
+	{
+		if (*str != delimiter && !in_word)
+		{
+			count++;
+			in_word = 1;
+		}
+		else if (*str == delimiter)
+			in_word = 0;
+		str++;
+	}
+	return (count);
+}
+
+void	exit_sorted_duplicate(t_stacks *s, int i)
 {
 	int	j;
 
@@ -25,82 +60,14 @@ void	exit_if_sorted_or_has_duplicate(t_stacks *s, int i)
 			while (j < s->a_size)
 			{
 				if (s->a[i] == s->a[j])
-					free_excit_msg(s, "Error\n");
+					free_exit_msg(s, "Error\n");
 				j++;
 			}
 			i++;
 		}
 	}
-	if (is_array_sorted(s))
-		free_excit_msg(s, NULL);
-}
-
-// convertit les char en long pour traiter les args
-void	parse_numbers(t_stacks *s)
-{
-	char	**tmp;
-	int		i;
-	int		z;
-
-	tmp = ft_split(s->join_args, ' ');
-	i = 0;
-	z = 0;
-	while (tmp[i] != NULL && tmp[i][0] != '\0')
-	{
-		s->a[z++] = ft_atol(tmp[i++], s);
-		free(tmp[i - 1]);
-	}
-	free(tmp);
-}
-
-void	init_stacks(int ac, char **av, t_stacks *s)
-{
-	int	i;
-	int	words;
-
-	i = 0;
-	words = 0;
-	s->a_size = 0;
-	s->b_size = 0;
-	while (--ac)
-	{
-		words = ft_count_words(av[i + 1], ' ');
-		if (words > 0)
-			s->a_size += words;
-		i++;
-	}
-	s->a = malloc(s->a_size * sizeof(*s->a));
-	if (s->a == NULL)
-		free_excit_msg(s, "Error\n");
-	s->b = malloc(s->a_size * sizeof(*s->b));
-	if (s->b == NULL)
-		free_excit_msg(s, "Error\n");
-}
-
-void	create_index(t_stacks *s)
-{
-	int	i;
-	int	j;
-	int	k;
-	int	*new_a;
-
-	new_a = malloc(s->a_size * sizeof * new_a);
-	if (new_a == NULL)
-		free_excit_msg(s, "Error\n");
-	i = -1;
-	while (++i < s->a_size)
-	{
-		k = 0;
-		j = -1;
-		while (++j < s->a_size)
-			if (s->a[i] > s->a[j])
-				k++;
-		new_a[i] = k;
-	}
-	i = s->a_size;
-	while (i--)
-		s->a[i] = new_a[i];
-	free(new_a);
+	if (is_sorted(s))
+		free_exit_msg(s, NULL);
 }
 
 int	ft_atol(const char *n, t_stacks *s)
@@ -123,10 +90,38 @@ int	ft_atol(const char *n, t_stacks *s)
 	while (n[i])
 	{
 		if (res > 2147483647 || (res * sign) < -2147483648 || ft_strlen(n) > 11)
-			free_excit_msg(s, "Error\n");
+			free_exit_msg(s, "Error\n");
 		if (!(n[i] >= '0' && n[i] <= '9'))
-			free_excit_msg(s, "Error\n");
+			free_exit_msg(s, "Error\n");
 		res = res * 10 + (n[i++] - '0');
 	}
 	return ((int)(res * sign));
+}
+
+void	create_index(t_stacks *s)
+{
+	int	i;
+	int	j;
+	int	k;
+	int	*new_a;
+
+	new_a = malloc(s->a_size * sizeof * new_a);
+	if (new_a == NULL)
+		free_exit_msg(s, "Error\n");
+	i = -1;
+	while (++i < s->a_size)
+	{
+		k = 0;
+		j = -1;
+		while (++j < s->a_size)
+		{
+			if (s->a[i] > s->a[j])
+				k++;
+		}
+		new_a[i] = k;
+	}
+	i = s->a_size;
+	while (i--)
+		s->a[i] = new_a[i];
+	free(new_a);
 }
