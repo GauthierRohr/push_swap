@@ -6,7 +6,7 @@
 #    By: grohr <grohr@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/29 13:13:00 by grohr             #+#    #+#              #
-#    Updated: 2025/04/10 16:27:55 by grohr            ###   ########.fr        #
+#    Updated: 2025/04/11 11:09:23 by grohr            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ $(LIBFT):
 	@make -s -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
-	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJ) -L$(LIBFT_DIR) -lft -o $(NAME)
 	@echo "\n$(GREEN) Compilation de push_swap réussie ! $(RESET)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
