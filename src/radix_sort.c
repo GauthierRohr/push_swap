@@ -6,12 +6,14 @@
 /*   By: grohr <grohr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:09:23 by grohr             #+#    #+#             */
-/*   Updated: 2025/04/10 16:44:44 by grohr            ###   ########.fr       */
+/*   Updated: 2025/04/11 11:53:57 by grohr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
+// return (1) if sorted
+// return (0) if not
 int	is_sorted(t_stacks *s)
 {
 	int	i;
@@ -26,9 +28,14 @@ int	is_sorted(t_stacks *s)
 	return (1);
 }
 
-static void	radix_sort_b(t_stacks *s, int b_size, int bit_size, int j)
+static void	radix_sort_b(t_stacks *s, int bit_size, int j)
 {
-	while (b_size-- && j <= bit_size && !is_sorted(s))
+	int	processed;
+
+	if (j > bit_size)
+		return ;
+	processed = s->b_size;
+	while (processed-- && !is_sorted(s))
 	{
 		if (((s->b[0] >> j) & 1) == 0)
 			rotate(s->b, s->b_size, "up", "b");
@@ -40,6 +47,7 @@ static void	radix_sort_b(t_stacks *s, int b_size, int bit_size, int j)
 			push("pa", s);
 }
 
+// size max = biggest number cause of create_index
 void	radix_sort(t_stacks *s)
 {
 	int	j;
@@ -61,7 +69,7 @@ void	radix_sort(t_stacks *s)
 			else
 				rotate(s->a, s->a_size, "up", "a");
 		}
-		radix_sort_b(s, s->b_size, bit_size, j + 1);
+		radix_sort_b(s, bit_size, j + 1);
 	}
 	while (s->b_size != 0)
 		push("pa", s);
