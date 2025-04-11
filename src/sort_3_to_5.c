@@ -6,29 +6,42 @@
 /*   By: grohr <grohr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:09:11 by grohr             #+#    #+#             */
-/*   Updated: 2025/04/11 13:34:46 by grohr            ###   ########.fr       */
+/*   Updated: 2025/04/11 16:56:34 by grohr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
 //2 operations maximum
-void	sort_three_elements(t_stacks *s)
+// Cas 1: [1, 3, 2] → swap + rotate up (ra)
+// Cas 2: [2, 1, 3] → swap (sa)
+// Cas 3: [2, 3, 1] → rotate down (rra)
+// Cas 4: [3, 1, 2] → rotate up (ra)
+// Cas 5: [3, 2, 1] → swap + rotate down (rra)
+void sort_three_elements(t_stacks *s)
 {
-	if (s->a[0] > s->a[1] && s->a[1] < s->a[2] && s->a[0] < s->a[2])
-		swap("sa", s->a, s->a_size);
-	else if (s->a[0] > s->a[1] && s->a[1] > s->a[2])
-	{
-		swap("sa", s->a, s->a_size);
-		rotate(s->a, s->a_size, "down", "a");
+    if (s->a[0] < s->a[1] && s->a[1] > s->a[2] && s->a[2] > s->a[0])
+    {
+        swap("sa", s->a, s->a_size);
+        rotate(s->a, s->a_size, "up", "a");
 	}
-	else if (s->a[0] > s->a[2])
-		rotate(s->a, s->a_size, "up", "a");
-	else if (s->a[1] > s->a[2])
-	{
-		swap("sa", s->a, s->a_size);
-		rotate(s->a, s->a_size, "up", "a");
-	}
+    else if (s->a[0] > s->a[1] && s->a[1] < s->a[2] && s->a[2] > s->a[0])
+    {
+        swap("sa", s->a, s->a_size);
+    }
+    else if (s->a[0] < s->a[1] && s->a[1] > s->a[2] && s->a[2] < s->a[0])
+    {
+        rotate(s->a, s->a_size, "down", "a");
+    }
+    else if (s->a[0] > s->a[1] && s->a[1] < s->a[2] && s->a[2] < s->a[0])
+    {
+        rotate(s->a, s->a_size, "up", "a");
+    }
+    else if (s->a[0] > s->a[1] && s->a[1] > s->a[2] && s->a[2] < s->a[0])
+    {
+        swap("sa", s->a, s->a_size);
+        rotate(s->a, s->a_size, "down", "a");
+    }
 }
 
 void	sort_four_elements(t_stacks *s)
