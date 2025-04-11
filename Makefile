@@ -6,7 +6,7 @@
 #    By: grohr <grohr@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/29 13:13:00 by grohr             #+#    #+#              #
-#    Updated: 2025/04/11 11:09:23 by grohr            ###   ########.fr        #
+#    Updated: 2025/04/11 13:10:55 by grohr            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,12 @@ SRC_DIR = src/
 OBJ_DIR = obj/
 
 # Sources et objets
-SRCS =  main.c move.c radix_sort.c sort.c  utils.c
+SRCS = 	free_exit.c \
+		main.c \
+		push_swap_rotate.c \
+		radix_sort.c \
+		sort_3_to_5.c \
+		utils.c
 SRC = $(addprefix $(SRC_DIR),$(SRCS))
 OBJ = $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC))
 

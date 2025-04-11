@@ -6,7 +6,7 @@
 /*   By: grohr <grohr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:43:13 by grohr             #+#    #+#             */
-/*   Updated: 2025/04/10 16:24:50 by grohr            ###   ########.fr       */
+/*   Updated: 2025/04/11 13:05:18 by grohr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ void		exit_sorted_duplicate(t_stacks *s, int i);
 int			is_sorted(t_stacks *s);
 int			ft_atol(const char *n, t_stacks *s);
 int			ft_count_words(const char *str, char delimiter);
+void		free_all(t_stacks *s);
 
 #endif

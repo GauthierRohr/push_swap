@@ -6,25 +6,11 @@
 /*   By: grohr <grohr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:43:58 by grohr             #+#    #+#             */
-/*   Updated: 2025/04/10 16:25:25 by grohr            ###   ########.fr       */
+/*   Updated: 2025/04/11 13:09:05 by grohr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
-
-void	free_exit_msg(t_stacks *s, char *msg)
-{
-	if (msg)
-		write(2, msg, ft_strlen(msg));
-	if (s != NULL)
-	{
-		free(s->a);
-		free(s->b);
-		free(s->join_args);
-		free(s);
-	}
-	exit(1);
-}
 
 int	ft_count_words(const char *str, char delimiter)
 {
@@ -45,29 +31,6 @@ int	ft_count_words(const char *str, char delimiter)
 		str++;
 	}
 	return (count);
-}
-
-void	exit_sorted_duplicate(t_stacks *s, int i)
-{
-	int	j;
-
-	j = 0;
-	if (i == 0)
-	{
-		while (i < s->a_size)
-		{
-			j = i + 1;
-			while (j < s->a_size)
-			{
-				if (s->a[i] == s->a[j])
-					free_exit_msg(s, "Error\n");
-				j++;
-			}
-			i++;
-		}
-	}
-	if (is_sorted(s))
-		free_exit_msg(s, NULL);
 }
 
 int	ft_atol(const char *n, t_stacks *s)

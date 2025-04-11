@@ -6,7 +6,7 @@
 /*   By: grohr <grohr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:09:23 by grohr             #+#    #+#             */
-/*   Updated: 2025/04/11 11:53:57 by grohr            ###   ########.fr       */
+/*   Updated: 2025/04/11 14:04:13 by grohr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,9 @@ int	is_sorted(t_stacks *s)
 	return (1);
 }
 
-static void	radix_sort_b(t_stacks *s, int bit_size, int j)
+static void	radix_sort_b(t_stacks *s, int b_size, int bit_size, int j)
 {
-	int	processed;
-
-	if (j > bit_size)
-		return ;
-	processed = s->b_size;
-	while (processed-- && !is_sorted(s))
+	while (b_size-- && j <= bit_size && !is_sorted(s))
 	{
 		if (((s->b[0] >> j) & 1) == 0)
 			rotate(s->b, s->b_size, "up", "b");
@@ -69,7 +64,7 @@ void	radix_sort(t_stacks *s)
 			else
 				rotate(s->a, s->a_size, "up", "a");
 		}
-		radix_sort_b(s, bit_size, j + 1);
+		radix_sort_b(s, s->b_size, bit_size, j + 1);
 	}
 	while (s->b_size != 0)
 		push("pa", s);

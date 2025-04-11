@@ -6,7 +6,7 @@
 /*   By: grohr <grohr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:43:38 by grohr             #+#    #+#             */
-/*   Updated: 2025/04/10 16:43:08 by grohr            ###   ########.fr       */
+/*   Updated: 2025/04/11 13:04:53 by grohr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,6 @@ int	main(int argc, char **argv)
 	else
 		radix_sort(s);
 	exit_sorted_duplicate(s, 1);
-	free_exit_msg(s, "Error\n");
+	free_all(s);
 	return (0);
 }
