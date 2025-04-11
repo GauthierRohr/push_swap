@@ -6,27 +6,39 @@
 /*   By: grohr <grohr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:43:38 by grohr             #+#    #+#             */
-/*   Updated: 2025/04/11 13:04:53 by grohr            ###   ########.fr       */
+/*   Updated: 2025/04/11 20:28:41 by grohr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
 // convertit les char en long pour traiter les args
+// Update just_parsing_my_args to properly handle errors and cleanup
+
 void	just_parsing_my_args(t_stacks *s)
 {
 	char	**tmp;
-	int		i;
-	int		j;
+	int		i[3];
 
 	tmp = ft_split(s->join_args, ' ');
-	i = 0;
-	j = 0;
-	while (tmp[i] != NULL && tmp[i][0] != '\0')
+	if (!tmp)
+		free_exit_msg(s, "Error\n");
+	i[0] = 0;
+	while (tmp[i[0]] && tmp[i[0]][0])
+		i[0]++;
+	if (i[0] != s->a_size)
+		cleanup_and_exit(tmp, s);
+	i[1] = 0;
+	i[2] = 0;
+	while (tmp[i[1]] && tmp[i[1]][0])
 	{
-		s->a[j++] = ft_atol(tmp[i++], s);
-		free(tmp[i - 1]);
+		s->a[i[1]] = ft_atol(tmp[i[1]], &i[2]);
+		if (i[2])
+			cleanup_and_exit(tmp, s);
+		i[1]++;
 	}
+	while (i[0]--)
+		free(tmp[i[0]]);
 	free(tmp);
 }
 
@@ -62,13 +74,12 @@ void	init_stacks_size(int ac, char **av, t_stacks *s)
 	int	i;
 	int	words;
 
-	i = 0;
-	words = 0;
 	s->a_size = 0;
 	s->b_size = 0;
-	while (--ac)
+	i = 1;
+	while (i < ac)
 	{
-		words = ft_count_words(av[i + 1], ' ');
+		words = ft_count_words(av[i], ' ');
 		if (words > 0)
 			s->a_size += words;
 		i++;
@@ -91,22 +102,24 @@ static void	just_checking_my_args(int argc, char **argv)
 
 	if (argc < 2)
 		free_exit_msg(NULL, "");
-	i = 1;
-	while (i < argc)
+	i = 0;
+	while (++i < argc)
 	{
-		j = 0;
-		if (!argv[i][0] || argv[i][0] == ' ')
+		j = -1;
+		while (argv[i][++j] == ' ')
+			;
+		if (argv[i][j] == '\0')
 			free_exit_msg(NULL, "Error\n");
 		while (argv[i][j] != '\0')
 		{
-			if ((!(ft_isdigit(argv[i][j])) && (argv[i][j] != ' ')
-					&& (argv[i][j] != '-' && argv[i][j] != '+'))
-				|| ((argv[i][j] == '-' || argv[i][j] == '+') &&
-				(argv[i][j + 1] == '\0' || argv[i][j + 1] == ' ')))
+			if ((!ft_isdigit(argv[i][j]) && argv[i][j] != ' ' &&
+				argv[i][j] != '-' && argv[i][j] != '+') ||
+				((argv[i][j] == '-' || argv[i][j] == '+') &&
+				(argv[i][j + 1] == '\0' || argv[i][j + 1] == ' ' ||
+				!ft_isdigit(argv[i][j + 1]))))
 				free_exit_msg(NULL, "Error\n");
 			j++;
 		}
-		i++;
 	}
 }
 

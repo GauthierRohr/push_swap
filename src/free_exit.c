@@ -6,7 +6,7 @@
 /*   By: grohr <grohr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 13:06:09 by grohr             #+#    #+#             */
-/*   Updated: 2025/04/11 14:50:51 by grohr            ###   ########.fr       */
+/*   Updated: 2025/04/11 20:34:35 by grohr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,27 @@ void	free_exit_msg(t_stacks *s, char *msg)
 	exit(1);
 }
 
+void	cleanup_and_exit(char **tmp, t_stacks *s)
+{
+	int	k;
+
+	k = 0;
+	if (tmp)
+	{
+		while (tmp[k] != NULL)
+			free(tmp[k++]);
+		free(tmp);
+	}
+	free_exit_msg(s, "Error\n");
+}
+
 void	exit_sorted_duplicate(t_stacks *s, int i)
 {
 	int	j;
 
-	j = 0;
 	if (i == 0)
 	{
+		i = 0;
 		while (i < s->a_size)
 		{
 			j = i + 1;
