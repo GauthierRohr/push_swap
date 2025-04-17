@@ -6,7 +6,7 @@
 /*   By: grohr <grohr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:43:58 by grohr             #+#    #+#             */
-/*   Updated: 2025/04/11 20:29:23 by grohr            ###   ########.fr       */
+/*   Updated: 2025/04/16 13:43:23 by grohr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	ft_count_words(const char *str, char delimiter)
 
 static int	check_limits(long long res, long sign, const char *n, int *error)
 {
-	if (res > 2147483647 || (res * sign) < -2147483648 || ft_strlen(n) > 11)
+	(void)n;
+	if (res > 2147483647 || (res * sign) < -2147483648)
 	{
 		*error = 1;
 		return (1);
@@ -49,9 +50,9 @@ static int	check_limits(long long res, long sign, const char *n, int *error)
 // assignation of 1 to *error, then returns 0
 long	ft_atol(const char *n, int *error)
 {
-	int			i;
-	long		sign;
-	long long	res;
+	int		i;
+	int		sign;
+	long	res;
 
 	res = 0;
 	sign = 1;
@@ -67,11 +68,11 @@ long	ft_atol(const char *n, int *error)
 	}
 	while (n[i])
 	{
+		res = res * 10 + (n[i++] - '0');
 		if (check_limits(res, sign, n, error) || !(n[i] >= '0' && n[i] <= '9'))
 			return (*error = 1, 0);
-		res = res * 10 + (n[i++] - '0');
 	}
-	return ((int)(res * sign));
+	return (res * sign);
 }
 
 void	create_index(t_stacks *s)

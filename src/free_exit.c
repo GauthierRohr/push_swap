@@ -6,7 +6,7 @@
 /*   By: grohr <grohr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 13:06:09 by grohr             #+#    #+#             */
-/*   Updated: 2025/04/11 20:34:35 by grohr            ###   ########.fr       */
+/*   Updated: 2025/04/13 15:34:00 by grohr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void	free_all(t_stacks *s)
 	}
 }
 
-// La fonction exit() termine immédiatement l'exécution d'un programme.
-// Elle prend un argument entier, généralement :
-// --> 0 pour indiquer une terminaison réussie
-// --> 1 (ou autre code non nul) pour signaler une erreur.
-// Elle nettoie les ressources allouées avant de fermer le programme,
-// comme le nettoyage des buffers ou la fermeture des fichiers ouverts.
+// EXIT:
+// Termine immédiatement l'exécution du programme.
+// --> 0 terminaison réussie
+// --> 1 (ou autre code non nul) : signaler une erreur.
+// Nettoie les ressources allouées avant de fermer le programme,
+// comme les buffers ou les fichiers ouverts.
 void	free_exit_msg(t_stacks *s, char *msg)
 {
 	if (msg)

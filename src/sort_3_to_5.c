@@ -6,13 +6,13 @@
 /*   By: grohr <grohr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:09:11 by grohr             #+#    #+#             */
-/*   Updated: 2025/04/11 17:29:50 by grohr            ###   ########.fr       */
+/*   Updated: 2025/04/13 15:37:12 by grohr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-// 2 operations maximum
+// 2 operations max
 // Cas 1: [1, 3, 2] → swap + rotate up (ra)
 // Cas 2: [2, 1, 3] → swap (sa)
 // Cas 3: [2, 3, 1] → rotate down (rra)

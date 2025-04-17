@@ -6,7 +6,7 @@
 /*   By: grohr <grohr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:43:38 by grohr             #+#    #+#             */
-/*   Updated: 2025/04/11 20:28:41 by grohr            ###   ########.fr       */
+/*   Updated: 2025/04/13 15:34:48 by grohr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 // convertit les char en long pour traiter les args
 // Update just_parsing_my_args to properly handle errors and cleanup
-
 void	just_parsing_my_args(t_stacks *s)
 {
 	char	**tmp;
@@ -93,7 +92,6 @@ void	init_stacks_size(int ac, char **av, t_stacks *s)
 }
 
 // static --> empêche son utilisation depuis d'autres fichiers.
-// (même si qqun inclut main.c ou tente de l'appeler depuis un autre fichier).
 // --> réduit les risques de conflits de noms
 static void	just_checking_my_args(int argc, char **argv)
 {
